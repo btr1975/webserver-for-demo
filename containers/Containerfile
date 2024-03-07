@@ -1,0 +1,28 @@
+FROM docker.io/library/ubuntu:jammy-20240111 AS base
+
+ENV PIP_INSTALL_COMMAND="pip install --no-cache"
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends python3  python3-pip python3-venv  openssh-client \
+    && apt-get clean
+
+RUN ${PIP_INSTALL_COMMAND} --upgrade pip setuptools wheel \
+    && mkdir ${HOME}/.ssh \
+    && touch -m 600 ${HOME}/.ssh/known_hosts \
+    && ssh-keyscan github.com >> ${HOME}/.ssh/known_hosts
+
+RUN python3.10 -m venv application
+
+ENV PATH="${PATH}:/application/bin"
+
+FROM base AS final
+
+ARG build_branch=main
+
+ENV BUILD_BRANCH=${build_branch}
+
+RUN ${PIP_INSTALL_COMMAND} git+ssh://git@github.com/btr1975/webserver-for-demo@${BUILD_BRANCH}
+
+EXPOSE 8080/tcp
+
+ENTRYPOINT ["webserver-for-demo-cli", "start", "-p", "8080"]
