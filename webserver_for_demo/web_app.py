@@ -54,7 +54,7 @@ async def get_redoc() -> HTMLResponse:
     return get_redoc_html(openapi_url="/docs/openapi.json", title="redoc")
 
 
-@web_app.get("/openapi.json", include_in_schema=False)
+@web_app.get("/docs/openapi.json", include_in_schema=False)
 async def get_openapi_json() -> dict:
     """Get OpenAPI JSON at the /openapi.json endpoint redirected from the /openapi.json endpoint
 
