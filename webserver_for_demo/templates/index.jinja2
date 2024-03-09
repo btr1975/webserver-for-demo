@@ -1,6 +1,14 @@
 {% extends "base.jinja2" %}
 
 {% block content %}
+<div>
+    <h2>Node Information</h2>
+    <ul>
+        <li>Node Name: {{ data.node_name }}</li>
+        <li>Node OS: {{ data.node_system }}</li>
+        <li>Node Address: {{ data.node_address }}</li>
+    </ul>
+</div>
 
 <div>
 <h2>Request Info</h2>

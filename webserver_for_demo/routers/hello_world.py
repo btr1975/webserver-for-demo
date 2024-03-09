@@ -2,6 +2,8 @@
 Hello World Example # FIXME: This is an example you should delete it
 """
 import os
+import socket
+import platform
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -50,6 +52,9 @@ async def get_hello(request: Request) -> templates.TemplateResponse:
 
     data = {
         'page': 'Hello World from webserver-for-demo',
+        'node_name': platform.node(),
+        'node_system': platform.system(),
+        'node_address': socket.gethostbyname(socket.gethostname()),
         'request_info': request_info,
         'request_headers': request_headers,
         'error': error
@@ -93,6 +98,9 @@ async def get_hello_one(request: Request) -> templates.TemplateResponse:
 
     data = {
         'page': 'Hello World 1 from webserver-for-demo',
+        'node_name': platform.node(),
+        'node_system': platform.system(),
+        'node_address': socket.gethostbyname(socket.gethostname()),
         'request_info': request_info,
         'request_headers': request_headers,
         'error': error
@@ -136,6 +144,9 @@ async def get_other(request: Request) -> templates.TemplateResponse:
 
     data = {
         'page': 'Other Hello World from webserver-for-demo',
+        'node_name': platform.node(),
+        'node_system': platform.system(),
+        'node_address': socket.gethostbyname(socket.gethostname()),
         'request_info': request_info,
         'request_headers': request_headers,
         'error': error
@@ -179,6 +190,9 @@ async def get_other_one(request: Request) -> templates.TemplateResponse:
 
     data = {
         'page': 'Other Hello World 1 from webserver-for-demo',
+        'node_name': platform.node(),
+        'node_system': platform.system(),
+        'node_address': socket.gethostbyname(socket.gethostname()),
         'request_info': request_info,
         'request_headers': request_headers,
         'error': error
