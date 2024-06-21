@@ -28,7 +28,7 @@ web_app = FastAPI(
     swagger_ui_parameters=swagger_ui_parameters,
     docs_url='/api/docs',
     redoc_url='/api/redoc',
-    openapi_url='/api/openapi.json'
+    openapi_url='/openapi.json'
 )
 
 web_app.include_router(example.router)
